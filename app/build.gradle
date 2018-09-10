@@ -1,6 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
+    // 签名配置
+    signingConfigs {
+        debugConfig {
+            storeFile file('/Users/mac/AndroidSign/sign/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        releaseConfig {
+            storeFile file('/Users/mac/AndroidSign/sign/android_sign.jks')
+            storePassword 'android_sign'
+            keyAlias 'android_sign_alias'
+            keyPassword 'android_sign_alias'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.codearms.maoqiqi.sign"
@@ -10,10 +25,35 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    // 构建类型配置
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            debuggable true
+            minifyEnabled true
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debugConfig
+        }
+        release {
+            debuggable false
+            minifyEnabled false
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+
+    flavorDimensions "default"
+
+    // 产品风味配置
+    productFlavors {
+        personal {
+            applicationId "com.codearms.maoqiqi.sign.personal"
+            versionNameSuffix '-personal'
+        }
+        enterprise {
+            applicationId "com.codearms.maoqiqi.sign.enterprise"
+            versionNameSuffix '-enterprise'
         }
     }
 }
