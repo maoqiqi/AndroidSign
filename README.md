@@ -26,6 +26,11 @@ Android 要求所有 APK 必须先使用证书进行数字签署，然后才能�
 
     * [构建未签署 APK 并签署 APK](#structure_unsigned_apk_and_signed_apk)
     * [配置 Gradle 签署](#sign_use_command_line_gradle)
+    
+* [Android 7.0 - APK signature scheme v2](#sign_scheme_v2)
+
+  * [手动签署 - 仅用传统方案签署](#sign_scheme_v2_android_studio_hand)
+  * [配置 Gradle 签署 - 仅用传统方案签署](#sign_scheme_v2_command_line_gradle)
 
 * [运行您的应用](#运行您的应用)
 
@@ -315,6 +320,49 @@ keytool -genkey -v -keystore my.jks -keyalg RSA -keysize 2048 -validity 10000 -a
 这个 APK 文件已经使用 build.gradle 文件中指定的私钥签署，并使用 zipalign 进行了对齐。
 
 
+<h2 id="sign_scheme_v2">Android 7.0 - APK signature scheme v2</h2>
+
+Android 官网说明：[APK signature scheme v2][2]。
+
+Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它能提供更快的应用安装时间和更多针对未授权 APK 文件更改的保护。
+
+在默认情况下，Android Studio 2.2 和 Android Plugin for Gradle 2.2 会使用 APK Signature Scheme v2 和传统签名方案来签署您的应用。
+
+如果您的应用在使用 APK Signature Scheme v2 时不能正确开发，您可以停用这项新方案。
+禁用过程会导致 Android Studio 2.2 和 Android Plugin for Gradle 2.2 仅使用传统签名方案来签署您的应用。
+
+<h3 id="sign_scheme_v2_android_studio_hand">手动签署 - 仅用传统方案签署</h3>
+
+在[使用 Android Studio 签署您的应用](#sign_use_android_studio)的[手动签署](#sign_use_android_studio_hand)的第三步中，
+在 Signature Versions 取消 V2（Full APK Signature）勾选。
+
+<img src="images/generate_signed_apk_v1.png" width="500"/>
+
+<h3 id="sign_scheme_v2_command_line_gradle">配置 Gradle 签署 - 仅用传统方案签署</h3>
+
+打开模块级 build.gradle 文件，然后将行 v2SigningEnabled false 添加到您的版本签名配置中：
+
+```
+android {
+    ...
+    defaultConfig { ... }
+    signingConfigs {
+        config {
+            storeFile file('sign/android_sign.jks')
+            storePassword 'android_sign'
+            keyAlias 'android_sign_alias'
+            keyPassword 'android_sign_alias'
+            v2SigningEnabled false
+        }
+    }
+    ...
+}
+```
+
+> 注：如果您使用 APK Signature Scheme v2 签署您的应用，并对应用进行了进一步更改，则应用的签名将无效。
+出于这个原因，请在使用 APK Signature Scheme v2 签署您的应用之前、而非之后使用 zipalign 等工具。
+
+
 ## 运行您的应用
 
 ### 在模拟器上运行您的应用
@@ -444,3 +492,4 @@ keytool -genkey -v -keystore my.jks -keyalg RSA -keysize 2048 -validity 10000 -a
 
 
 [1]: https://developer.android.com/studio/publish/app-signing?hl=zh-cn
+[2]: https://developer.android.google.cn/about/versions/nougat/android-7.0#apk_signature_v2
