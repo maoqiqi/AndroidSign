@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AndroidSign</string>
+    <string name="about">关于</string>
+    <string name="launcher_description">launcher</string>
+    <string name="function_introduction">功能介绍</string>
+    <string name="check_update">检查更新</string>
+    <string name="update_description">更新说明</string>
+    <string name="give_a_star">给个Star吧</string>
+    <string name="star_content">喜欢的朋友请Star，欢迎一起学习讨论。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
 </resources>

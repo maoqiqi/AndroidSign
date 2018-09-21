@@ -36,6 +36,8 @@ android {
     // 构建类型配置
     buildTypes {
         debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
             debuggable true
             jniDebuggable false
             minifyEnabled true
@@ -44,6 +46,9 @@ android {
             signingConfig signingConfigs.debugConfig
         }
         release {
+            // 定义变量在代码中使用
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
             debuggable false // 支持断点调试和log信息打印(默认true)
             jniDebuggable false // JNI调试(默认false)
             minifyEnabled false // 压缩类文件代码(默认false)

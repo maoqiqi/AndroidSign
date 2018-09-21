@@ -1,0 +1,18 @@
+<resources>
+    <dimen name="four">4dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="twelve">12dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="twenty_four">24dp</dimen>
+    <dimen name="thirty_two">32dp</dimen>
+
+    <dimen name="text_size_bigger">20sp</dimen>
+    <dimen name="text_size_big">18sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_smaller">12sp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="line_height">0.5dp</dimen>
+</resources>
