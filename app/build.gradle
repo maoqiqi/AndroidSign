@@ -37,17 +37,20 @@ android {
     buildTypes {
         debug {
             debuggable true
+            jniDebuggable false
             minifyEnabled true
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debugConfig
         }
         release {
-            debuggable false
-            minifyEnabled false
-            useProguard true
+            debuggable false // 支持断点调试和log信息打印(默认true)
+            jniDebuggable false // JNI调试(默认false)
+            minifyEnabled false // 压缩类文件代码(默认false)
+            useProguard true // 压缩资源文件
+            // 混淆文件的位置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.releaseConfig
+            signingConfig signingConfigs.releaseConfig // 签名配置
         }
     }
 
