@@ -65,15 +65,45 @@ android {
     productFlavors {
         personal {
             applicationId "com.codearms.maoqiqi.sign.personal"
-            versionNameSuffix '-personal'
+            // versionNameSuffix '-personal'
+            versionName '2.0.0'
         }
         enterprise {
             applicationId "com.codearms.maoqiqi.sign.enterprise"
-            versionNameSuffix '-enterprise'
+            // versionNameSuffix '-enterprise'
+            versionName '1.1.1'
         }
     }
 }
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
+}
+
+println "-------------------------------------------------------------------------------------------"
+// 默认版本名称
+def defaultVersionName = android.defaultConfig.versionName
+println "defaultVersionName：" + defaultVersionName
+
+android.applicationVariants.all { variant ->
+    println "-------------------------------------------------------------------------------------------"
+    println "versionName：" + variant.versionName
+    println "flavorName：" + variant.flavorName
+    println "buildTypeName：" + variant.buildType.name
+    println "productName：" + variant.name
+
+    variant.outputs.all { output ->
+        // 时间
+        def time = new Date().format('yyyyMMddHHmmss', TimeZone.getTimeZone("UTC"))
+        // 要被替换的源字符串
+        def sourceFile = "-${variant.flavorName}-${variant.buildType.name}"
+        // 替换的字符串
+        def replaceFile = "_${variant.flavorName}_${variant.buildType.name}_${variant.versionName}_${time}"
+        // 替换
+        def fileName = output.outputFile.name.replace(sourceFile, replaceFile)
+        println "fileName：" + fileName
+        // gradle 3.0 之前
+        // output.outputFile = new File(output.outputFile.parent, fileName)
+        outputFileName = fileName
+    }
 }
