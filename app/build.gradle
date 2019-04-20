@@ -104,7 +104,9 @@ android.applicationVariants.all { variant ->
         // 替换的字符串
         def replaceFile = "_${variant.flavorName}_${variant.buildType.name}_${variant.versionName}_${time}"
         // 替换
-        def fileName = output.outputFile.name.replace(sourceFile, replaceFile)
+        // 3.3 之前
+        // def fileName = output.outputFile.name.replace(sourceFile, replaceFile)
+        def fileName = outputFileName.replace(sourceFile, replaceFile)
         println "fileName：" + fileName
         // gradle 3.0 之前
         // output.outputFile = new File(output.outputFile.parent, fileName)
