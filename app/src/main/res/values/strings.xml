@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidSign</string>
+    <string name="app_name">Sign</string>
     <string name="about">关于</string>
     <string name="launcher_description">launcher</string>
     <string name="function_introduction">功能介绍</string>

@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_primary"
         app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_back"
+        app:navigationIcon="@drawable/ic_home"
         app:titleTextColor="@color/white" />
 
     <ImageView
